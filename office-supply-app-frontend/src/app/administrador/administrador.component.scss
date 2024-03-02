@@ -1,0 +1,110 @@
+.form-card {
+  margin: 8px;
+}
+
+.form-content, .fields {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+mat-form-field, mat-label, button, mat-select {
+  font-size: 13px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttons>button {
+  margin: 3px;
+}
+
+.list-card, .form-content {
+  margin: 8px;
+}
+
+.table {
+  overflow-y: hidden;
+}
+
+th, td {
+  font-size: 13px;
+}
+
+mat-toolbar {
+  font-size: 13px;
+  justify-content: center;
+}
+
+@media (min-width: 768px ) {
+  .form-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .fields {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
+    font-size: 16px;
+  }   
+
+  .description-field, .name-field {
+    margin: 2px;
+    width: 230px;
+  }
+
+  .status-field {
+    width: 150px;
+    margin: 2px;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-direction: row;
+    margin-left: 5px;
+  }
+}
+
+ @media (min-width: 1024px) {
+  mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
+    font-size: 18px;
+  }   
+
+  .description-field, .name-field {
+    margin: 5px;
+    width: 320px;
+  }
+
+  .status-field {
+    width: 210px;
+    margin: 5px;
+  }
+ } 
+
+ @media (min-width: 1280px) {
+  mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
+    font-size: 20px;
+  }   
+
+  .description-field, .name-field {
+    margin: 5px;
+    width: 400px;
+  }
+
+  .status-field {
+    width: 300px;
+    margin: 5px;
+  }
+ } 

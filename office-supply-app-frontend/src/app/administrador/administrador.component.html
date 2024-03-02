@@ -1,0 +1,55 @@
+<section>
+  <mat-card class="form-card">
+    <mat-card-content class="form-content">
+      <div class="fields">
+        <mat-form-field class="status-field">
+          <mat-label>Filtrar por Status</mat-label>
+          <mat-select [(value)]="selected" [(ngModel)]="filtroStatus" (selectionChange)="filtrar()">
+            <mat-option value="">Todos</mat-option>
+            <mat-option value="aprovado">Aprovado</mat-option>
+            <mat-option value="reprovado">Reprovado</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="name-field">
+          <input matInput placeholder="Nome do Solicitante" [(ngModel)]="filtroNomeSolicitante" (keyup)="filtrar()">
+        </mat-form-field>
+        <mat-form-field class="description-field">
+          <input matInput placeholder="Descrição do Item" [(ngModel)]="filtroDescricaoItem" (keyup)="filtrar()">
+        </mat-form-field>
+      </div>
+      <div class="buttons">
+        <button mat-raised-button color="accent" (click)="limparFiltros()">Limpar</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</section>
+
+<section>
+  <mat-card class="list-card">
+    <mat-toolbar color="primary">
+      <span> Solicitações de Compra </span>
+    </mat-toolbar>
+
+    <div *ngIf="solicitacoes" class="table">
+      <table mat-table [dataSource]="solicitacoesFiltradas" class="mat-elevation-z8">
+        <ng-container matColumnDef="nomeSolicitante">
+          <th mat-header-cell *matHeaderCellDef> Solicitante </th>
+          <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.nomeSolicitante}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="descricao">
+          <th mat-header-cell *matHeaderCellDef> Descrição </th>
+          <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.descricao}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.status}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </mat-card>
+</section>
