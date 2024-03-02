@@ -1,16 +1,13 @@
 import { Routes } from '@angular/router';
 import { AdministradorComponent } from './administrador/administrador.component';
+import { SolicitanteComponent } from './solicitante/solicitante.component';
+import { AlmoxarifeComponent } from './almoxarife/almoxarife.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/administrador', pathMatch: 'full' },
+  { path: '', redirectTo: '/solicitante', pathMatch: 'full' },
 
-//  { path: 'solicitante', loadChildren: () => import('./solicitante/solicitante.component').then(m => m.SolicitanteComponent) },
+  { path: 'solicitante', component: SolicitanteComponent },
   { path: 'administrador', component: AdministradorComponent },
-
- // { path: 'almoxarife', loadChildren: () => import('./almoxarife/almoxarife.component').then(m => m.AlmoxarifeComponent) }
+  { path: 'almoxarife', component: AlmoxarifeComponent }
 ];
 
-//import { Routes } from '@angular/router';
-
-// export const routes: Routes = [
-// ];

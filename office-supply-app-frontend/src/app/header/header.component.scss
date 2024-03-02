@@ -1,0 +1,66 @@
+mat-toolbar {
+  font-size: 16px;
+  height: 100px;
+}
+
+.buttons, .title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.usuario-buttons {
+  width: 130px;
+  border-radius: 50px;
+  font-size: 13px;
+  height: 25px;
+}
+
+.header {
+  width: 100%;
+  display: block;
+  flex-direction: column;
+  padding: 2px 2px;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  mat-toolbar {
+    font-size: 23px;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .usuario-buttons {
+    width: 180px;
+    font-size: 16px;
+    height: 30px;
+  }
+}
+
+@media (min-width: 1024px) {
+  mat-toolbar {
+    font-size: 23px;
+  }
+  .usuario-buttons {
+    width: 180px;
+    font-size: 16px;
+    height: 40px;
+  }
+}
+
+@media (min-width: 1280px) {
+  mat-toolbar {
+    font-size: 27px;
+  }
+
+  .usuario-buttons {
+    width: 200px;
+    font-size: 18px;
+    height: 50px;
+  }
+}

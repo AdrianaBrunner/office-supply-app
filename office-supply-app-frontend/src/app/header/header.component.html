@@ -1,0 +1,17 @@
+<mat-toolbar color="primary">
+  <div class="header">
+    <div class="title">
+      <span>Gerenciador de Compras</span>
+    </div>
+    <div class="buttons">
+      <button class="usuario-buttons" mat-raised-button color="white" [matMenuTriggerFor]="menu" >
+        Perfil de Acesso
+      </button>
+      <mat-menu #menu="matMenu" class="menu-buttons">
+        <button mat-menu-item [routerLink]="'/solicitante'">Solicitante</button>
+        <button mat-menu-item [routerLink]="'/almoxarife'">Almoxarife</button>
+        <button mat-menu-item [routerLink]="'/administrador'">Administrador</button>
+      </mat-menu>
+    </div>
+  </div>
+</mat-toolbar>

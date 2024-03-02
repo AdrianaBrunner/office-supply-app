@@ -1,1 +1,31 @@
-<p>solicitante works!</p>
+<header>
+  <span>Solicitante</span>
+</header>
+
+<section>
+  <mat-card>
+    <div class="toolbar">
+      <span>Nova Solicitação de Compra</span>
+    </div>
+    
+    <form [formGroup]="formulario" (ngSubmit)="salvar()">
+      <div class="fields">
+        <mat-form-field style="margin-bottom: -0.9em">
+          <mat-label>Nome do solicitante</mat-label>
+          <input matInput formControlName="solicitante" name="solicitante" required>
+        </mat-form-field>
+
+        <mat-form-field style="margin-bottom: -0.9em">
+          <mat-label>Descrição do item</mat-label>
+          <input matInput formControlName="descricao" name="descricao" required>
+        </mat-form-field>
+
+        <mat-form-field style="margin-bottom: -0.9em" class="preco-field">
+          <mat-label>Preço do item</mat-label>
+        <input matInput formControlName="preco" name="preco" required prefix="R$ " mask= "00,00">
+        </mat-form-field>
+      </div>
+      <button mat-raised-button color="primary" type="submit" [disabled]="formulario.invalid">Enviar Solicitação</button>
+    </form>
+  </mat-card>
+</section>

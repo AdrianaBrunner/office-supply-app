@@ -1,0 +1,101 @@
+header {
+  color: rgb(118, 20, 179);
+  margin: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+mat-card {
+  margin: 8px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: rgb(118, 20, 179);
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+}
+  
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+mat-form-field, mat-label {
+  width: 100%;
+  font-size: 15px;
+}
+
+button {
+  border-radius: 50px;
+}
+
+@media (min-width: 768px) {
+  header {
+    font-size: 19px;
+  }
+
+  .toolbar {
+    font-size: 19px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .fields {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 7px;
+  }
+
+  .preco-field {
+    width: 450px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .toolbar {
+    font-size: 21px;
+  }
+
+  mat-form-field, mat-label {
+    font-size: 16px;
+  }
+  
+  button {
+    margin-top: 10px;
+    font-size: 16px;
+    height: 40px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .toolbar {
+    font-size: 25px;
+    padding: 15px;
+  }
+
+  mat-form-field, mat-label {
+    font-size: 18px;
+  }
+
+  button {
+    margin-top: 10px;
+    font-size: 18px;
+    height: 50px;
+  }
+}

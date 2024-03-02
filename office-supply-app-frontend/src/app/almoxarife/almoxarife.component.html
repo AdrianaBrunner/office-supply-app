@@ -1,1 +1,89 @@
-<p>almoxarife works!</p>
+<header>
+  <span class="titulo-usuario">Almoxarife</span>
+  <h5 class="mensagem-usuario">Selecione um item da lista para aprovar ou reprovar.</h5>
+</header>
+
+<section>
+  <mat-accordion>
+    <mat-expansion-panel #panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Solicitação
+        </mat-panel-title>
+      </mat-expansion-panel-header>  
+        <form [formGroup]="formulario" (ngSubmit)="salvar(panel)">
+          <div class="fields">
+            <mat-form-field >
+              <mat-label>Nome do solicitante</mat-label>
+              <input matInput formControlName="solicitante" name="solicitante" readonly>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Descrição do item</mat-label>
+              <input matInput formControlName="descricao" name="descricao" readonly>
+            </mat-form-field>
+
+            <mat-form-field class="preco-field">
+              <mat-label>Preço do item</mat-label>
+              <input matInput formControlName="preco" name="preco" readonly prefix="R$ " mask= "00,00">
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Ação</mat-label>
+              <mat-select formControlName="acao" name="acao" required (selectionChange)="validarObs($event.value)">
+                <mat-option value="aprovar">Aprovar</mat-option>
+                <mat-option value="reprovar">Reprovar</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            @if(formulario.get('acao').value === 'reprovar') {
+              <mat-form-field >
+                <mat-label>Observações</mat-label>
+                <textarea matInput formControlName="observacoes" name="observacoes" 
+              ></textarea>
+              </mat-form-field>
+            }
+          </div>
+          <button mat-raised-button color="primary" type="submit" [disabled]="formulario.invalid || desabilitarBotao">Finalizar</button>
+        </form>
+    </mat-expansion-panel>
+  </mat-accordion>
+</section>
+
+
+<section>
+
+  <mat-card class="list-card">
+    <mat-toolbar color="primary">
+      <span> Solicitações de Compra </span>
+    </mat-toolbar>
+
+    <div *ngIf="solicitacoes" class="table">
+      <table mat-table [dataSource]="solicitacoesFiltradas" class="mat-elevation-z8">
+        
+        <ng-container matColumnDef="solicitante">
+          <th mat-header-cell *matHeaderCellDef> Solicitante </th>
+          <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.solicitante}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="descricao">
+          <th mat-header-cell *matHeaderCellDef> Descrição </th>
+          <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.descricao}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="preco">
+          <th mat-header-cell *matHeaderCellDef> Preço </th>
+          <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.preco}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef> Status </th>
+          <td mat-cell *matCellDef="let solicitacao"> {{solicitacao.status}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="preencherFormulario(row, panel)"></tr>
+      </table>
+    </div>
+  </mat-card>
+</section>
