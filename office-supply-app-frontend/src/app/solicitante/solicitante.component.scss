@@ -37,10 +37,6 @@ button {
   border-radius: 50px;
 }
 
-.table {
-  overflow-y: hidden;
-}
-
 @media (min-width: 768px) {
   header {
     font-size: 19px;
@@ -65,14 +61,14 @@ button {
     width: 500px;
   }
 
-  mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
+  mat-form-field, mat-label, button, mat-select, mat-toolbar {
     font-size: 16px;
   }   
 
 }
 
 @media (min-width: 1024px) {
-  mat-form-field, mat-label, th, td, mat-toolbar {
+  mat-form-field, mat-label, mat-toolbar {
     font-size: 17px;
   }
   
@@ -84,7 +80,7 @@ button {
 }
 
 @media (min-width: 1280px) {
-  mat-form-field, mat-label, th, td, mat-toolbar, mat-panel-title {
+  mat-form-field, mat-label, mat-toolbar, mat-panel-title {
     font-size: 18px;
   }
 

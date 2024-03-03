@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface SolicitacaoCompraRepository extends JpaRepository<SolicitacaoCompra, Long> {
     @Query(value = "select * from solicitacao_compra order by id desc", nativeQuery = true)
-    public List<SolicitacaoCompra> listarTodasSolicitacoes();
+    List<SolicitacaoCompra> listarTodasSolicitacoes();
 }

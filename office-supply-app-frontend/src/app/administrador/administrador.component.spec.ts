@@ -6,7 +6,8 @@ import { CommonModule } from '@angular/common';
 import { SolicitacoesCompraService } from '../service/solicitacoes-compra.service';
 import { HttpClient, HttpHandler } from '@angular/common/http'; // Importe do @angular/common/http
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
+import { Solicitacoes } from '../model/solicitacoes';
 
 describe('AdministradorComponent', () => {
   let component: AdministradorComponent;
@@ -41,7 +42,7 @@ describe('AdministradorComponent', () => {
   });
 
   it('deve listar solicitacoes', () => {
-    const mockSolicitacoes = [{
+    const mockSolicitacoes: Solicitacoes[] = [{
       id: 1,
       status: 'Aprovado',
       solicitante: 'João',
@@ -49,27 +50,32 @@ describe('AdministradorComponent', () => {
       preco: 100,
       observacao: ''
     }];
+    component.solicitacoes = new BehaviorSubject<Solicitacoes[]>([]);
     spyOn(solicitacoesService, 'listarSolicitacoes').and.returnValue(of(mockSolicitacoes)); 
     component.ngOnInit();
-    expect(component.solicitacoes).toEqual(mockSolicitacoes);
-    expect(component.solicitacoesFiltradas).toEqual(mockSolicitacoes);
+    component.solicitacoes.subscribe(solicitacoes => {
+      expect(solicitacoes).toEqual(mockSolicitacoes);
+    });
+    component.solicitacoesFiltradas.subscribe(solicitacoesFiltradas => {
+      expect(solicitacoesFiltradas).toEqual(mockSolicitacoes);
+    });
   });
 
   it('deve filtrar solicitacoes', () => {
-    component.solicitacoes = [
-      { id: 1, status: 'Aprovado', solicitante: 'João', descricao: 'Compra de material', preco: 100, observacao: '' },
-      { id: 2, status: 'Pendente', solicitante: 'Maria', descricao: 'Compra de equipamento', preco: 200, observacao: '' }
-    ];
+    component.solicitacoes.next([
+      { id: 1, solicitante: 'João', descricao: 'Compra de material', preco: 100, status: 'Aprovado', observacao: '' },
+      { id: 2, solicitante: 'Maria', descricao: 'Compra de equipamento', preco: 200, status: 'Pendente', observacao: '' }
+    ]);
     component.formulario = new FormGroup({
       filtroStatus: new FormControl('Aprovado'),
       filtroSolicitante: new FormControl('João'),
       filtroDescricao: new FormControl('Compra de material')
     });
     component.filtrar();
-    expect(component.solicitacoesFiltradas.length).toBe(1);
-    expect(component.solicitacoesFiltradas[0].status).toBe('Aprovado');
-    expect(component.solicitacoesFiltradas[0].solicitante).toBe('João');
-    expect(component.solicitacoesFiltradas[0].descricao).toBe('Compra de material');
+    expect(component.solicitacoesFiltradas.value.length).toBe(1);
+    expect(component.solicitacoesFiltradas.value[0].status).toBe('Aprovado');
+    expect(component.solicitacoesFiltradas.value[0].solicitante).toBe('João');
+    expect(component.solicitacoesFiltradas.value[0].descricao).toBe('Compra de material');
   });
 
   it('deve construir formulario', () => {

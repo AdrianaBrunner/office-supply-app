@@ -1,35 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SolicitacoesCompraService } from '../service/solicitacoes-compra.service';
-import { take } from 'rxjs';
+import { BehaviorSubject, take } from 'rxjs';
 import { NgxCurrencyDirective } from 'ngx-currency';
 import { Solicitacoes } from '../model/solicitacoes';
-import { MatTableModule } from '@angular/material/table';
-import { CommonModule } from '@angular/common';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatIconModule } from '@angular/material/icon';
+import { SharedImportsModule } from '../shared/shared-imports.module';
 @Component({
   selector: 'app-solicitante',
   standalone: true,
-  imports: [ MatCardModule, MatToolbarModule, MatTableModule, CommonModule, MatIconModule,
-    MatFormFieldModule, MatSelectModule, MatInputModule, MatExpansionModule, MatButtonModule, FormsModule, NgxCurrencyDirective, ReactiveFormsModule ],
+  imports: [ NgxCurrencyDirective, SharedImportsModule ],
   providers: [],
   templateUrl: './solicitante.component.html',
   styleUrl: './solicitante.component.scss'
 })
+
 export class SolicitanteComponent implements OnInit {
   formulario: FormGroup;
   valorInicialFormulario: any;
-  solicitacoes: Solicitacoes[] = [];
-  solicitacoesFiltradas: Solicitacoes[] = [];
-  displayedColumns = ['solicitante', 'descricao', 'preco', 'status', 'observacao'];
+  solicitacoes: BehaviorSubject<Solicitacoes[]> = new BehaviorSubject<Solicitacoes[]>([]);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,10 +33,13 @@ export class SolicitanteComponent implements OnInit {
 
   listarSolicitacoes() {
     this.solicitacoesService.listarSolicitacoes().subscribe({
-      next: (res: Solicitacoes[]) => { this.solicitacoes = res; this.solicitacoesFiltradas = this.solicitacoes; },
+      next: (response: Solicitacoes[]) => { this.solicitacoes.next(response); },
       error: (err) => {
-        console.dir(err);
-        this.snackBar.open(err.error.message, 'Ok', { duration: 2000 })
+        error: (err) => {
+          err.error && err.error.message 
+          ? this.snackBar.open(err.error.message, 'Ok', { duration: 2000 })
+          : this.snackBar.open('Ocorreu um erro ao listar as solicitações.', 'Ok', { duration: 2000 });
+        }
       }
     });
   }
@@ -69,9 +61,9 @@ export class SolicitanteComponent implements OnInit {
     const data = this.formulario.getRawValue();
     this.solicitacoesService.criarSolicitacao(data).pipe(take(1)).subscribe(() => {
       this.mostrarSnackBar('Solicitação realizada com sucesso!', 'Ok');
+      this.limparFormulario();
+      this.listarSolicitacoes();
     });
-    this.limparFormulario();
-    this.listarSolicitacoes();
   }
 
   limparFormulario() {

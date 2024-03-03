@@ -6,7 +6,9 @@ import com.app.services.SolicitacaoCompraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @CrossOrigin
@@ -28,11 +30,15 @@ public class SolicitacaoCompraController {
 
     @PostMapping
     public ResponseEntity<SolicitacaoCompra> adicionarSolicitacao(@RequestBody SolicitacaoCompra solicitacao) {
-        return ResponseEntity.accepted().body(solicitacaoCompraService.adicionarSolicitacao(solicitacao));
+
+        SolicitacaoCompra solicitacaoCompra = solicitacaoCompraService.adicionarSolicitacao(solicitacao);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(solicitacaoCompra.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(solicitacaoCompraService.adicionarSolicitacao(solicitacao));
     }
 
     @PutMapping()
     public ResponseEntity<SolicitacaoCompra> atualizarSolicitacao(@RequestBody SolicitacaoCompra solicitacao) {
-        return ResponseEntity.accepted().body(solicitacaoCompraService.atualizarSolicitacao(solicitacao));
+        return ResponseEntity.ok().body(solicitacaoCompraService.atualizarSolicitacao(solicitacao));
     }
 }

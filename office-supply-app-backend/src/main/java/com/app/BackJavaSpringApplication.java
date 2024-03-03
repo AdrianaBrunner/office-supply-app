@@ -11,16 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.List;
 
 @SpringBootApplication
-public class BackJavaSpringApplication implements CommandLineRunner {
+public class BackJavaSpringApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(BackJavaSpringApplication.class, args);
     }
 
-    @Autowired
-    private SolicitacaoCompraRepository solicitacaoCompraRepository;
-
-    @Override
-    public void run(String... args) throws Exception {
-    }
 }

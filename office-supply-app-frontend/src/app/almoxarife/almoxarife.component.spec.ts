@@ -16,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { of } from 'rxjs';
 
-fdescribe('AlmoxarifeComponent', () => {
+describe('AlmoxarifeComponent', () => {
   let component: AlmoxarifeComponent;
   let fixture: ComponentFixture<AlmoxarifeComponent>;
   let solicitacoesService: SolicitacoesCompraService;
@@ -26,14 +26,6 @@ fdescribe('AlmoxarifeComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         CommonModule,
-        MatTableModule,
-        MatCardModule,
-        MatToolbarModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatInputModule,
-        MatButtonModule,
-        MatExpansionModule,
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
@@ -74,12 +66,7 @@ fdescribe('AlmoxarifeComponent', () => {
     expect(component.formulario.get('observacao').validator).toBeNull();
   });
 
-  it('deve desabilitar os campos do formulário corretamente', () => {
-    component.desabilitarCampos();
-    expect(component.formulario.get('solicitante').disabled).toBeTruthy();
-    expect(component.formulario.get('descricao').disabled).toBeTruthy();
-    expect(component.formulario.get('preco').disabled).toBeTruthy();
-    expect(component.formulario.get('status').disabled).toBeTruthy();
+  it('deve desabilitar o botão de enviar solicitação', () => {
     expect(component.desabilitarBotao).toBeTruthy();
   });
 
@@ -88,7 +75,7 @@ fdescribe('AlmoxarifeComponent', () => {
       id: 1,
       solicitante: 'Teste',
       descricao: 'Descrição',
-      preco: 100,
+      preco: 90,
       status: 'Aprovado',
       observacao: ''
     };
@@ -100,4 +87,9 @@ fdescribe('AlmoxarifeComponent', () => {
     expect(component.desabilitarBotao).toBeTruthy();
   });
 
+  it('deve limpar o formulário corretamente', () => {
+    component.limparFormulario();
+    expect(component.formulario.value).toEqual(component.valorInicialFormulario);
+    expect(component.desabilitarBotao).toBeTruthy();
+  });
 });

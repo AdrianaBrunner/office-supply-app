@@ -1,24 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatCardModule } from '@angular/material/card';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import { Component, OnInit } from '@angular/core';
 import { Solicitacoes } from '../model/solicitacoes';
-import { CommonModule } from '@angular/common';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { SolicitacoesCompraService } from '../service/solicitacoes-compra.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { BehaviorSubject } from 'rxjs';
+import { SharedImportsModule } from '../shared/shared-imports.module';
 
 @Component({
   selector: 'app-administrador',
   standalone: true,
-  imports: [CommonModule, MatTableModule,
-    MatCardModule, MatToolbarModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatButtonModule, MatPaginatorModule, 
-    FormsModule, ReactiveFormsModule],
+  imports: [ SharedImportsModule ],
   templateUrl: './administrador.component.html',
   styleUrl: './administrador.component.scss'
 })
@@ -26,9 +17,8 @@ export class AdministradorComponent implements OnInit {
   formulario: FormGroup;
   valorInicialFormulario: any;
 
-  solicitacoes: Solicitacoes[] = [];
-  solicitacoesFiltradas: Solicitacoes[] = [];
-  displayedColumns = ['solicitante', 'descricao', 'preco', 'status', 'observacao'];
+  solicitacoes: BehaviorSubject<Solicitacoes[]> = new BehaviorSubject<Solicitacoes[]>([]);
+  solicitacoesFiltradas: BehaviorSubject<Solicitacoes[]> = new BehaviorSubject<Solicitacoes[]>([]);
 
   constructor(
     private solicitacoesService: SolicitacoesCompraService,
@@ -43,11 +33,12 @@ export class AdministradorComponent implements OnInit {
 
   listarSolicitacoes() {
     this.solicitacoesService.listarSolicitacoes().subscribe({
-      next: (res: Solicitacoes[]) => { this.solicitacoes = res; this.solicitacoesFiltradas = this.solicitacoes; },
+      next: (response: Solicitacoes[]) => { this.solicitacoes.next(response); this.solicitacoesFiltradas.next(response) },
       error: (err) => {
-        console.dir(err);
-        this.snackBar.open(err.error.message, 'Ok', { duration: 2000 })
-      }
+        err.error && err.error.message 
+        ? this.snackBar.open(err.error.message, 'Ok', { duration: 2000 })
+        : this.snackBar.open('Ocorreu um erro ao listar as solicitações.', 'Ok', { duration: 2000 });
+      } 
     });
   }
 
@@ -57,13 +48,13 @@ export class AdministradorComponent implements OnInit {
     const descricao = this.formulario.get('filtroDescricao').value;
     
     if (status || solicitante || descricao) {
-      this.solicitacoesFiltradas = this.solicitacoes.filter(vl =>
-        (vl.status && vl.status.toLowerCase().includes(status.toLowerCase()) || !status) &&
+      this.solicitacoesFiltradas.next(this.solicitacoes.value.filter(vl =>
+        ((vl.status && vl.status.toLowerCase().includes(status.toLowerCase())) || !status) &&
         (vl.solicitante.toLowerCase().includes(solicitante.toLowerCase()) || !solicitante) &&
         (vl.descricao.toLowerCase().includes(descricao.toLowerCase()) || !descricao)
-      );
+      ))
     } else {
-      this.solicitacoesFiltradas = this.solicitacoes
+      this.solicitacoesFiltradas.next(this.solicitacoes.value);
     }
   }
 
@@ -78,7 +69,7 @@ export class AdministradorComponent implements OnInit {
 
   limparFiltros() {
     this.formulario.reset(this.valorInicialFormulario);
-    this.solicitacoesFiltradas = this.solicitacoes
+    this.solicitacoesFiltradas.next(this.solicitacoes.value);
   }
   
 }

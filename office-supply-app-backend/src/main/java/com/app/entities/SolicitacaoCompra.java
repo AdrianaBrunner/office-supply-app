@@ -29,10 +29,12 @@ public class SolicitacaoCompra {
 
     private String observacao;
 
-    public SolicitacaoCompra(String solicitante, String descricao, StatusSolicitacaoCompra status, BigDecimal preco) {
+    public SolicitacaoCompra(Long id, String solicitante, String descricao, StatusSolicitacaoCompra status, BigDecimal preco, String observacao) {
+        this.id = id;
         this.solicitante = solicitante;
         this.descricao = descricao;
         this.status = status;
         this.preco = preco;
+        this.observacao = observacao;
     }
 }

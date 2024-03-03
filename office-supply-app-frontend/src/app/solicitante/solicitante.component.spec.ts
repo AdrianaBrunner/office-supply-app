@@ -3,8 +3,9 @@ import { SolicitanteComponent } from './solicitante.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SolicitacoesCompraService } from '../service/solicitacoes-compra.service';
-import { of } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { Solicitacoes } from '../model/solicitacoes';
 
 describe('SolicitanteComponent', () => {
   let component: SolicitanteComponent;
@@ -45,7 +46,7 @@ describe('SolicitanteComponent', () => {
   });
 
   it('deve listar solicitações ao inicializar', () => {
-    const mockSolicitacoes = [{
+    const mockSolicitacoes: Solicitacoes[] = [{
       id: 1,
       solicitante: 'Teste',
       descricao: 'Descrição',
@@ -53,10 +54,13 @@ describe('SolicitanteComponent', () => {
       status: 'Aprovado',
       observacao: 'Observação'
     }];
+    component.solicitacoes = new BehaviorSubject<Solicitacoes[]>([]);
+
     spyOn(solicitacoesService, 'listarSolicitacoes').and.returnValue(of(mockSolicitacoes));
     component.ngOnInit();
-    expect(component.solicitacoes).toEqual(mockSolicitacoes);
-    expect(component.solicitacoesFiltradas).toEqual(mockSolicitacoes);
+    component.solicitacoes.subscribe((solicitacoes) => {
+      expect(solicitacoes).toEqual(mockSolicitacoes);
+    });
   });
 
   it('deve criar uma nova solicitação', () => {

@@ -34,14 +34,6 @@ mat-form-field, mat-label, button, mat-select {
   margin: 8px;
 }
 
-.table {
-  overflow-y: hidden;
-}
-
-th, td {
-  font-size: 13px;
-}
-
 mat-toolbar {
   font-size: 15px;
 }
@@ -66,7 +58,7 @@ mat-toolbar {
     gap: 7px;
   }
 
-  mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
+  mat-form-field, mat-label, button, mat-select, mat-toolbar {
     font-size: 16px;
   }   
 
@@ -88,7 +80,7 @@ mat-toolbar {
 }
 
  @media (min-width: 1024px) {
-  mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
+  mat-form-field, mat-label, button, mat-select, mat-toolbar {
     font-size: 17px;
   }   
 
@@ -104,7 +96,7 @@ mat-toolbar {
  } 
 
  @media (min-width: 1280px) {
-  mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
+  mat-form-field, mat-label, button, mat-select, mat-toolbar {
     font-size: 18px;
   }   
 

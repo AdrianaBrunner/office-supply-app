@@ -34,15 +34,6 @@ button {
   border-radius: 50px;
 }
 
-.table {
-  overflow-y: hidden;
-}
-
-tr:hover {
-  cursor: pointer;
-  background-color: rgba(228, 196, 249, 0.379);
-}
-
 @media (min-width: 768px) {
   .titulo-usuario {
     font-size: 19px;
@@ -64,14 +55,14 @@ tr:hover {
     width: 500px;
   }
 
-  mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
+  mat-form-field, mat-label, button, mat-select, mat-toolbar {
     font-size: 16px;
   }   
 
 }
 
 @media (min-width: 1024px) {
-  mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
+  mat-form-field, mat-label, button, mat-select, mat-toolbar {
     font-size: 17px;
   }   
 
@@ -91,7 +82,7 @@ tr:hover {
 }
 
 @media (min-width: 1280px) {
-  mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
+  mat-form-field, mat-label, button, mat-select, mat-toolbar {
     font-size: 18px;
   }   
 
