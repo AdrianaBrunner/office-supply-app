@@ -5,12 +5,12 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterModule } from '@angular/router';
-
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ MatToolbarModule, FormsModule, MatSelectModule, MatButtonModule, MatMenuModule, RouterModule ],
+  imports: [ MatToolbarModule, FormsModule, MatSelectModule, MatButtonModule, MatMenuModule, RouterModule, MatIconModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

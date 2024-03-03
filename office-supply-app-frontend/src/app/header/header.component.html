@@ -1,17 +1,31 @@
-<mat-toolbar color="primary">
-  <div class="header">
-    <div class="title">
-      <span>Gerenciador de Compras</span>
+<main>
+  <mat-toolbar color="primary">
+    <div class="header">
+      <div class="title">
+        <span>Gerenciador de Compras</span>
+      </div>
+      <div class="buttons">
+        <button class="usuario-buttons" mat-raised-button color="white" [matMenuTriggerFor]="menu">
+          <mat-icon>settings</mat-icon>
+          Usuários
+        </button>
+        <mat-menu #menu="matMenu">
+          <div>
+            <button mat-menu-item [routerLink]="'/solicitante'">
+              <mat-icon>assignment_ind</mat-icon>
+              <span class="menu-buttons">Solicitante</span>
+            </button>
+          </div>
+          <button mat-menu-item [routerLink]="'/almoxarife'">
+            <mat-icon>store</mat-icon>
+            <span class="menu-buttons">Almoxarife</span>
+          </button>
+          <button mat-menu-item [routerLink]="'/administrador'">
+            <mat-icon>supervised_user_circle</mat-icon>
+            <span class="menu-buttons">Administrador</span>
+          </button>
+        </mat-menu>
+      </div>
     </div>
-    <div class="buttons">
-      <button class="usuario-buttons" mat-raised-button color="white" [matMenuTriggerFor]="menu" >
-        Perfil de Acesso
-      </button>
-      <mat-menu #menu="matMenu" class="menu-buttons">
-        <button mat-menu-item [routerLink]="'/solicitante'">Solicitante</button>
-        <button mat-menu-item [routerLink]="'/almoxarife'">Almoxarife</button>
-        <button mat-menu-item [routerLink]="'/administrador'">Administrador</button>
-      </mat-menu>
-    </div>
-  </div>
-</mat-toolbar>
+  </mat-toolbar>
+</main>

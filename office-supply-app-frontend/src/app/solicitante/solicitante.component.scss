@@ -5,21 +5,21 @@ header {
   font-weight: 600;
 }
 
-mat-card {
+mat-expansion-panel, .list-card {
   margin: 8px;
 }
 
-.toolbar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  background-color: rgb(118, 20, 179);
-  color: white;
+mat-panel-title {
   font-size: 15px;
-  font-weight: 400;
 }
-  
+
+.solicitacao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -28,7 +28,7 @@ form {
   padding: 10px;
 }
 
-mat-form-field, mat-label {
+mat-form-field, mat-label, mat-toolbar {
   width: 100%;
   font-size: 15px;
 }
@@ -37,21 +37,13 @@ button {
   border-radius: 50px;
 }
 
+.table {
+  overflow-y: hidden;
+}
+
 @media (min-width: 768px) {
   header {
     font-size: 19px;
-  }
-
-  .toolbar {
-    font-size: 19px;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
   }
 
   .fields {
@@ -62,18 +54,26 @@ button {
     gap: 7px;
   }
 
-  .preco-field {
-    width: 450px;
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
+
+  .preco-field {
+    width: 500px;
+  }
+
+  mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
+    font-size: 16px;
+  }   
+
 }
 
 @media (min-width: 1024px) {
-  .toolbar {
-    font-size: 21px;
-  }
-
-  mat-form-field, mat-label {
-    font-size: 16px;
+  mat-form-field, mat-label, th, td, mat-toolbar {
+    font-size: 17px;
   }
   
   button {
@@ -84,12 +84,7 @@ button {
 }
 
 @media (min-width: 1280px) {
-  .toolbar {
-    font-size: 25px;
-    padding: 15px;
-  }
-
-  mat-form-field, mat-label {
+  mat-form-field, mat-label, th, td, mat-toolbar, mat-panel-title {
     font-size: 18px;
   }
 

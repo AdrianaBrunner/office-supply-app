@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Solicitacoes } from '../model/solicitacoes';
@@ -9,12 +9,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SolicitacoesCompraService } from '../service/solicitacoes-compra.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-administrador',
   standalone: true,
   imports: [CommonModule, MatTableModule,
-    MatCardModule, MatToolbarModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatButtonModule, 
+    MatCardModule, MatToolbarModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatButtonModule, MatPaginatorModule, 
     FormsModule, ReactiveFormsModule],
   templateUrl: './administrador.component.html',
   styleUrl: './administrador.component.scss'
@@ -25,22 +28,27 @@ export class AdministradorComponent implements OnInit {
 
   solicitacoes: Solicitacoes[] = [];
   solicitacoesFiltradas: Solicitacoes[] = [];
-  displayedColumns = ['solicitante', 'descricao', 'preco', 'status'];
+  displayedColumns = ['solicitante', 'descricao', 'preco', 'status', 'observacao'];
 
   constructor(
-    private formBuilder: FormBuilder
+    private solicitacoesService: SolicitacoesCompraService,
+    private formBuilder: FormBuilder,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
    this.construirFormulario();
+   this.listarSolicitacoes();
+  }
 
-    this.solicitacoes = [
-      { id: 1, solicitante: 'João', descricao: 'Comprar 10 caixas de papel A4', preco: 15.00, status: '' },
-      { id: 2, solicitante: 'Maria', descricao: 'Comprar 5 canetas', preco: 15.00, status: 'Aprovado' },
-      { id: 3, solicitante: 'José', descricao: 'Comprar 5 canetas', preco: 15.00, status: 'Reprovado' },
-      { id: 4, solicitante: 'Pedro', descricao: 'Comprar 5 canetas', preco: 15.00, status: 'Aprovado' },
-    ]
-    this.solicitacoesFiltradas = this.solicitacoes;
+  listarSolicitacoes() {
+    this.solicitacoesService.listarSolicitacoes().subscribe({
+      next: (res: Solicitacoes[]) => { this.solicitacoes = res; this.solicitacoesFiltradas = this.solicitacoes; },
+      error: (err) => {
+        console.dir(err);
+        this.snackBar.open(err.error.message, 'Ok', { duration: 2000 })
+      }
+    });
   }
 
   filtrar() {
@@ -50,7 +58,7 @@ export class AdministradorComponent implements OnInit {
     
     if (status || solicitante || descricao) {
       this.solicitacoesFiltradas = this.solicitacoes.filter(vl =>
-        (vl.status.toLowerCase().includes(status.toLowerCase()) || !status) &&
+        (vl.status && vl.status.toLowerCase().includes(status.toLowerCase()) || !status) &&
         (vl.solicitante.toLowerCase().includes(solicitante.toLowerCase()) || !solicitante) &&
         (vl.descricao.toLowerCase().includes(descricao.toLowerCase()) || !descricao)
       );

@@ -4,4 +4,5 @@ export interface Solicitacoes {
   descricao: string;
   preco: number;
   status: string;
+  observacao: string;
 }

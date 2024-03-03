@@ -11,20 +11,11 @@ header {
 mat-expansion-panel, .list-card {
   margin: 8px;
 }
+
 mat-panel-title {
   font-size: 15px;
 }
 
-mat-toolbar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  background-color: rgb(118, 20, 179);
-  color: white;
-  font-size: 15px;
-  font-weight: 400;
-}
   
 form {
   display: flex;
@@ -34,7 +25,7 @@ form {
   padding: 10px;
 }
 
-mat-form-field, mat-label {
+mat-form-field, mat-label, mat-toolbar {
   width: 100%;
   font-size: 15px;
 }
@@ -61,10 +52,6 @@ tr:hover {
     font-size: 16px;
   }
 
-  mat-toolbar {
-    font-size: 19px;
-  }
-
   .fields {
     display: flex;
     flex-direction: row;
@@ -76,49 +63,37 @@ tr:hover {
   .preco-field {
     width: 500px;
   }
+
+  mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
+    font-size: 16px;
+  }   
+
 }
 
 @media (min-width: 1024px) {
-  .titulo-usuario {
-    font-size: 21px;
-  }
+  mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
+    font-size: 17px;
+  }   
 
-  .mensagem-usuario {
-    font-size: 18px;
-  }
-
-  .toolbar {
-    font-size: 21px;
-  }
-
-  mat-form-field, mat-label {
-    font-size: 16px;
-  }
-  
   button {
     margin-top: 10px;
     font-size: 16px;
     height: 40px;
   }
-}
 
-@media (min-width: 1280px) {
   .titulo-usuario {
-    font-size: 40px;
+    font-size: 21px;
   }
 
   .mensagem-usuario {
-    font-size: 20px;
-  }
-
-  .toolbar {
-    font-size: 25px;
-    padding: 15px;
-  }
-
-  mat-form-field, mat-label {
     font-size: 18px;
   }
+}
+
+@media (min-width: 1280px) {
+  mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
+    font-size: 18px;
+  }   
 
   button {
     margin-top: 10px;
@@ -126,8 +101,15 @@ tr:hover {
     height: 50px;
   }
 
+  .titulo-usuario {
+    font-size: 25px;
+  }
+
+  .mensagem-usuario {
+    font-size: 20px;
+  }
+  
   .titulo-usuario, span {
     font-size: 18px;
   }
-  
 }

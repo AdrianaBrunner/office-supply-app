@@ -27,9 +27,10 @@ mat-form-field, mat-label, button, mat-select {
 
 .buttons>button {
   margin: 3px;
+  border-radius: 50px;
 }
 
-.list-card, .form-content {
+.list-card {
   margin: 8px;
 }
 
@@ -42,8 +43,7 @@ th, td {
 }
 
 mat-toolbar {
-  font-size: 13px;
-  justify-content: center;
+  font-size: 15px;
 }
 
 @media (min-width: 768px ) {
@@ -63,20 +63,19 @@ mat-toolbar {
     justify-content: center;
     align-items: center;
     flex-direction: row;
+    gap: 7px;
   }
 
   mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
     font-size: 16px;
   }   
 
-  .description-field, .name-field {
-    margin: 3px;
+  .descricao-field, .nome-field {
     width: 230px;
   }
 
   .status-field {
     width: 150px;
-    margin: 3px;
   }
 
   .buttons {
@@ -90,10 +89,10 @@ mat-toolbar {
 
  @media (min-width: 1024px) {
   mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
-    font-size: 18px;
+    font-size: 17px;
   }   
 
-  .description-field, .name-field {
+  .descricao-field, .nome-field {
     margin: 5px;
     width: 320px;
   }
@@ -106,10 +105,10 @@ mat-toolbar {
 
  @media (min-width: 1280px) {
   mat-form-field, mat-label, button, mat-select, th, td, mat-toolbar {
-    font-size: 20px;
+    font-size: 18px;
   }   
 
-  .description-field, .name-field {
+  .descricao-field, .nome-field {
     margin: 5px;
     width: 400px;
   }
