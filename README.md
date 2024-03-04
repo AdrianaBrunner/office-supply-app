@@ -5,7 +5,7 @@ Este projeto é uma aplicação web que gerencia o fluxo de compra de material d
 <b>Características da aplicação</b>
 
 - Possui 3 perfis de usuário: Solicitante, Almoxarife e Administrador.
-- O solicitante poderá realizar uma nova solicitação de compra preenchendo os campos: nome do solicitante, descrição do item e preço. Após inserir a solicitação ele poderá visualizar a listagem de solicitações.
+- O solicitante poderá realizar uma nova solicitação de compra preenchendo os campos: nome do solicitante, descrição do item e preço do produto (com máscara R$ 00,00). Após inserir a solicitação ele poderá visualizar a listagem de solicitações.
 
 - O almoxarife é responsável por aprovar ou reprovar as solicitações. Em sua tela ele terá acesso a listagem de solicitações e ao selecionar uma delas deve preencher o campo Ação com as opções Aprovar ou Reprovar. Se reprovar é necessário que digite uma observação.
 
@@ -31,19 +31,19 @@ Java, Spring Boot, JUnit5, Mockito.
 
 ### 🔧 Instalação
 
-#### Angular 
-Após clonar o projeto, abra a pasta office-supply-app-frontend na IDE de sua preferência e digite npm install no terminal. Finalizada a instalação, digitar ng serve -o para abrir a aplicação.
-
-#### Java 
-Em sua IDE abra a pasta office-supply-app-backend e execute a classe BackJavaSpringApplication.
-
 #### Banco de dados 
 - Crie seu login e senha no sql server(ssms).
+- Após conectar, deve criar o banco de dados: dentro do SQL Server Management Studio rodar o seguinte script:
+
+```
+create database officedb
+```
+
 - Abrir o arquivo application.properties dentro da pasta office-supply-app-backend 
-- Preencher seu usuario e senha conforme abaixo:
+- Preencher seu usuario e senha conforme indicado pelas setas abaixo:
 
 ```# Database connection settings
-spring.datasource.url=jdbc:sqlserver://DESKTOP-8A8FEJD\\MSSQLSERVER01:1433;databaseName=office;encrypt=false
+spring.datasource.url=jdbc:sqlserver://DESKTOP-8A8FEJD\\MSSQLSERVER01:1433;databaseName=officedb;encrypt=false
 spring.datasource.username=seuUsuarioAqui <-----
 spring.datasource.password=suaSenhaAqui <------
 # JDBC driver
@@ -54,15 +54,15 @@ spring.jpa.show-sql=true
 spring.jpa.hibernate.ddl-auto=update
 ```
 
-Para criação do banco de dados: dentro do seu SSMS rodar o seguinte script:
-
-```
-create database officedb
-```
-
 A tabela solicitacao_compra será criada pelo JPA na primeira execução do programa.
 
 Obs: Em caso de contratempos com o banco de dados SQL Server, o arquivo application.properties oferece a opção de configurar o uso do banco H2 como alternativa. Para isso, basta descomentar as configurações referentes ao H2 e comentar as configurações do SQL Server.
+
+#### Java 
+Em sua IDE abra a pasta office-supply-app-backend e execute a classe BackJavaSpringApplication.
+
+#### Angular 
+Após clonar o projeto, abra a pasta office-supply-app-frontend na IDE de sua preferência e digite npm install no terminal. Finalizada a instalação, digitar ng serve -o para abrir a aplicação.
 
 #### Breakpoints de responsividade: 
 - celular 320px 
@@ -74,16 +74,15 @@ Obs: Em caso de contratempos com o banco de dados SQL Server, o arquivo applicat
 
 - <b> Tela do solicitante:
 
-![TelaSolicitante](https://github.com/AdrianaBrunner/office-supply-app/assets/88938672/e36216da-bb61-45a3-bc27-5fddd7d7ad25)
+![TelaSolicitante](https://github.com/AdrianaBrunner/office-supply-app/assets/88938672/41b901ec-8056-481e-ab26-36eab5d90266)
 
 - Tela do almoxarife
 
-![TelaAlmoxarife](https://github.com/AdrianaBrunner/office-supply-app/assets/88938672/8e761003-a255-4121-8ed4-d2289b0e2786)
-
+![TelaAlmoxarife](https://github.com/AdrianaBrunner/office-supply-app/assets/88938672/c54edadf-eed9-49e7-bf77-2ff4bcc1fa66)
 
 - Tela do administrador
 
-![TelaAdministrador](https://github.com/AdrianaBrunner/office-supply-app/assets/88938672/f0bef0b1-1496-4601-a773-628586c6235e)
+![TelaAdministrador](https://github.com/AdrianaBrunner/office-supply-app/assets/88938672/8dbf902d-85a4-476d-b8b6-e5f14c4dcd7a)
 
 
 
