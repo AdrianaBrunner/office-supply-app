@@ -46,10 +46,8 @@ Em sua IDE abra a pasta office-supply-app-backend e execute a classe BackJavaSpr
 spring.datasource.url=jdbc:sqlserver://DESKTOP-8A8FEJD\\MSSQLSERVER01:1433;databaseName=office;encrypt=false
 spring.datasource.username=seuUsuarioAqui <-----
 spring.datasource.password=suaSenhaAqui <------
-
 # JDBC driver
 spring.datasource.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
-
 # Hibernate settings
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.SQLServerDialect
 spring.jpa.show-sql=true
@@ -63,6 +61,14 @@ create database officedb
 ```
 
 A tabela solicitacao_compra será criada pelo JPA na primeira execução do programa.
+
+Obs: Em caso de contratempos com o banco de dados SQL Server, o arquivo application.properties oferece a opção de configurar o uso do banco H2 como alternativa. Para isso, basta descomentar as configurações referentes ao H2 e comentar as configurações do SQL Server.
+
+#### Breakpoints de responsividade: 
+- celular 320px 
+- tablet 768px
+- desktop 1024px
+- monitor 1280px
 
 ### 🎬 Visualização do Funcionamento do Sistema
 
